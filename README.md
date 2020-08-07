@@ -9,5 +9,4 @@ are processed as inputs for motion control of the Robot.
 
 Hardware list:
 
-Robot, Raspberry-pi, Neural Compute Stick, WebCam, Bluetooth Transmitter and Receiver, Mini-
-Loudspeaker, Arduino
+Robot, Raspberry-pi, Neural Compute Stick, WebCam, HC-05 Bluetooth Transmitter and Receiver, Arduino
