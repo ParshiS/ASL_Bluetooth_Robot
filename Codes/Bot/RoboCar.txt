@@ -1,0 +1,123 @@
+#define motor1_en 10      // motor 1 enable pin 
+#define motor2_en 11      // motor 2 enable pin 
+#define motor1_dir1 4     // motor 1 input1 (InputA) 
+#define motor1_dir2 5     // motor 1 input2 (InputA)
+#define motor2_dir1 6     // motor 2 input1 (InputB)
+#define motor2_dir2 7    // motor 2 input2  (InputB)
+int counter =0;
+
+char INBYTE;
+void setup() {
+  pinMode(13, OUTPUT);
+  pinMode(motor1_en,OUTPUT);  // declaring enable pins of motor as a output 
+  pinMode(motor2_en,OUTPUT);
+  pinMode(motor1_dir1,OUTPUT);  // declaring motor 1 pins as outputs
+  pinMode(motor1_dir2,OUTPUT);
+  pinMode(motor2_dir1,OUTPUT);  // declaring motor 2 pins as outputs 
+  pinMode(motor2_dir2,OUTPUT);
+  Serial.begin(9600); 
+  delay(50);
+}
+
+void loop() {
+  counter++;
+  Serial.println("Press 1 to turn on LED and 0 to turn off ");
+  while (true){
+    if (Serial.available()){
+      break;
+    }
+  }
+  INBYTE = Serial.read();
+  Serial.println(INBYTE);
+//  if (INBYTE == '0'){
+//    digitalWrite(13, LOW);
+//    
+//  }
+//  else if (INBYTE == '1'){
+//    digitalWrite(13, HIGH);
+//  }
+
+if (INBYTE == 'F' || INBYTE == 'f'){
+  forward();
+ // delay(1000);
+ // Stop();
+}
+else if(INBYTE == 'o' || INBYTE == 'O'){
+backward();
+//  delay(1000);
+//  Stop();
+}
+else if(INBYTE == 'v' || INBYTE == 'V'){
+left();
+//  delay(1000);
+//  Stop();
+}
+else if(INBYTE == 'w' || INBYTE == 'W'){
+right();
+ // delay(1000);
+ // Stop();
+}
+else if(INBYTE == 's' || INBYTE == 'S'){
+Stop();
+ // delay(1000);
+}
+else{
+Stop();
+ // delay(1000);
+}
+  Serial.println(counter);
+  delay(50); // wait half a sec
+}
+
+
+
+ void forward()  // function for robot forward movement 
+     {
+        analogWrite(motor1_en,255);
+        analogWrite(motor2_en,255);
+        digitalWrite(motor1_dir1,HIGH);
+        digitalWrite(motor1_dir2,LOW);
+        digitalWrite(motor2_dir1,LOW);
+        digitalWrite(motor2_dir2,HIGH);
+      
+     }
+     void backward() // function for robot backward movement 
+     {
+        analogWrite(motor1_en,255);
+        analogWrite(motor2_en,255);
+        digitalWrite(motor1_dir1,LOW);
+        digitalWrite(motor1_dir2,HIGH);
+        digitalWrite(motor2_dir1,HIGH);
+        digitalWrite(motor2_dir2,LOW);
+      
+     }
+     void left() // function for robot left movement 
+     {
+        analogWrite(motor1_en,255);
+        analogWrite(motor2_en,255);
+        digitalWrite(motor1_dir1,HIGH);
+        digitalWrite(motor1_dir2,LOW);
+        digitalWrite(motor2_dir1,HIGH);
+        digitalWrite(motor2_dir2,LOW);
+      
+     }
+     void right() // function for robot right movement 
+     {
+        analogWrite(motor1_en,255);
+        analogWrite(motor2_en,255);
+        digitalWrite(motor1_dir1,LOW);
+        digitalWrite(motor1_dir2,HIGH);
+        digitalWrite(motor2_dir1,LOW);
+        digitalWrite(motor2_dir2,HIGH);
+      
+     }
+     void Stop() // // function for no movement
+     {
+        analogWrite(motor1_en,0);
+        analogWrite(motor2_en,0);
+        digitalWrite(motor1_dir1,LOW);
+        digitalWrite(motor1_dir2,LOW);
+        digitalWrite(motor2_dir1,LOW);
+        digitalWrite(motor2_dir2,LOW);
+      
+     }
